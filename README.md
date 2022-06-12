@@ -1,5 +1,5 @@
 ---
-typora-copy-images-to: ./image
+
 ---
 
 # http_server-tcp_server
@@ -8,7 +8,7 @@ typora-copy-images-to: ./image
 
 ## 总体结构
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612224752493.png" alt="image-20220612224752493" style="zoom:63%;" />
+![image-20220612233951512](image/image-20220612233951512.png)
 
 本任务实现一个用户管理系统，用户可以登录、拉取和编辑他们的信息
 
@@ -161,27 +161,27 @@ CREATE TABLE `user_info_tab_00000009` LIKE `user_info_tab_00000000`;
 
 ## 系统流程
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612225130972.png" alt="image-20220612225130972" style="zoom:80%;" />
+![image-20220612234000929](image/image-20220612234000929.png)
 
 - 登录
 
-  ![login](/Users/zhifeng.wei/github/http_server-tcp_server/image/login-5045542.png)
+  ![image-20220612234006295](image/image-20220612234006295.png)
 
 - 注册
 
-  ![register.drawio](/Users/zhifeng.wei/github/http_server-tcp_server/image/register.drawio.png)
+  ![](image/image-20220612234011940.png)
 
 - 获取用户信息
 
-  ![getuserinfo.drawio](/Users/zhifeng.wei/github/http_server-tcp_server/image/getuserinfo.drawio.png)
+  ![image-20220612234017950](image/image-20220612234017950.png)
 
 - 更新用户信息
 
-  ![update.drawio (1)](/Users/zhifeng.wei/github/http_server-tcp_server/image/update.drawio (1).png)
+  ![image-20220612234022600](image/image-20220612234022600.png)
 
 - 上传头像
 
-  ![upload.drawio](/Users/zhifeng.wei/github/http_server-tcp_server/image/upload.drawio.png)
+  ![image-20220612233939367](image/image-20220612233939367.png)
 
 
 
@@ -189,16 +189,16 @@ CREATE TABLE `user_info_tab_00000009` LIKE `user_info_tab_00000000`;
 
 * 登录界面
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612231332063.png" alt="image-20220612231332063" style="zoom:50%;" />
+<img src="image/image-20220612234039677.png" alt="image-20220612234039677" style="zoom:50%;" />
 
 * 注册界面
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612231359767.png" alt="image-20220612231359767" style="zoom:50%;" />
+<img src="image/image-20220612234032672.png" alt="image-20220612234032672" style="zoom:50%;" />
 
 * 用户信息界面
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612231431611.png" alt="image-20220612231431611" style="zoom:50%;" />
+<img src="image/image-20220612234045589.png" alt="image-20220612234045589" style="zoom:50%;" />
 
 * 信息修改
 
-<img src="/Users/zhifeng.wei/github/http_server-tcp_server/image/image-20220612231456857.png" alt="image-20220612231456857" style="zoom:50%;" />
+<img src="image/image-20220612234054942.png" alt="image-20220612234054942" style="zoom:50%;" />
