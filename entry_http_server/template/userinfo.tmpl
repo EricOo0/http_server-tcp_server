@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登陆界面</title>
+    <style>
+        html {
+            background-color: #B5DEF2;
+        }
+
+        .wrapper {
+            margin: 140px 0 140px auto;
+            width: 884px;
+        }
+
+        .loginBox {
+            background-color: #F0F4F6;
+            /*上divcolor*/
+            border: 1px solid #BfD6E1;
+            border-radius: 5px;
+            color: #444;
+            font: 14px 'Microsoft YaHei', '微软雅黑';
+            margin: 0 auto;
+            width: 388px
+        }
+
+        .loginBox .loginBoxCenter {
+            border-bottom: 1px solid #DDE0E8;
+            padding: 24px;
+        }
+
+        .loginBox .loginBoxCenter p {
+            margin-bottom: 10px
+        }
+
+        .loginBox .loginBoxButtons {
+            /*background-color: #F0F4F6;*/
+            /*下divcolor*/
+            border-top: 0px solid #FFF;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            line-height: 28px;
+            overflow: hidden;
+            padding: 20px 24px;
+            vertical-align: center;
+            filter: alpha(Opacity=80);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+        }
+
+        .loginBox .loginInput {
+            border: 1px solid #D2D9dC;
+            border-radius: 2px;
+            color: #444;
+            font: 12px 'Microsoft YaHei', '微软雅黑';
+            padding: 8px 14px;
+            margin-bottom: 8px;
+            width: 310px;
+        }
+
+        .loginBox .loginInput:FOCUS {
+            border: 1px solid #B7D4EA;
+            box-shadow: 0 0 8px #B7D4EA;
+        }
+
+        .loginBox .loginBtn {
+            background-image: -moz-linear-gradient(to bottom, blue, #85CFEE);
+            border: 1px solid #98CCE7;
+            border-radius: 20px;
+            box-shadow: inset rgba(255, 255, 255, 0.6) 0 1px 1px, rgba(0, 0, 0, 0.1) 0 1px 1px;
+            color: #444;
+            /*登录*/
+            cursor: pointer;
+            float: right;
+            font: bold 13px Arial;
+            padding: 10px 50px;
+        }
+
+        .loginBox .loginBtn:HOVER {
+            background-image: -moz-linear-gradient(to top, blue, #85CFEE);
+        }
+
+        .loginBox a.forgetLink {
+            color: #ABABAB;
+            cursor: pointer;
+            float: right;
+            font: 11px/20px Arial;
+            text-decoration: none;
+            vertical-align: middle;
+            /*忘记密码*/
+        }
+
+        .loginBox a.forgetLink:HOVER {
+            color: #000000;
+            text-decoration: none;
+            /*忘记密码*/
+        }
+
+        .loginBox input#remember {
+            vertical-align: middle;
+        }
+
+        .loginBox label[for="remember"] {
+            font: 11px Arial;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+            <div class="UserinfoBox">
+                <div class="loginBoxCenter">
+                    <p><label for="username">用户名：</label></p>
+                    <p><input type="username" id="username" name="username" class="loginInput" autofocus="autofocus" autocomplete="off" placeholder="" value="" /></p>
+                    <p><label for="password">昵称：</label></p>
+                    <p><input type="nickname" id="nickname" name="nickname" class="loginInput" required="" placeholder="" value="" /></p>
+                    <p><label for="picture">头像：</label></p>
+                    <img id="img" src="" alt="some_text">
+
+                  </div>
+                <div class="loginBoxButtons">
+                    <button class="profileBtn" onclick="login()">获取用户信息</button>
+                    <button class="profileBtn" onclick="update()">修改用户信息</button>
+                    <p>
+                    <label>修改头像：</label>
+                    <input type="file" id="selectFiles" >
+
+                    </p>
+                </div>
+            </div>
+
+    </div>
+</body>
+
+
+</html>
+
+<script>
+ /// get select files.
+       var input = document.getElementById("selectFiles");
+        if(typeof FileReader==='undefined'){
+            result.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+            input.setAttribute('disabled','disabled');
+        }else{
+            input.addEventListener('change',readFile,false);
+        }
+
+
+    function login(){
+        console.log( localStorage.getItem('token'))
+        var name = document.getElementById("username").value
+
+        var url = "/profile"
+        var request = new XMLHttpRequest();
+        request.open("Get", url,false);
+        request.setRequestHeader("token", localStorage.getItem('token'));
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                var json = JSON.parse(request.responseText);
+                document.getElementById("username").value=json.username
+                document.getElementById("nickname").value=json.nickName
+                var img = document.getElementById('img');
+                img.src = "data:image/jpeg;base64,"+json.profile_picture;
+                console.log(json);
+            }else{
+                alert(JSON.parse(request.responseText).msg)
+            }
+        };
+        request.send()
+    }
+        function update(){
+           window.location.replace("/updateUser")
+        }
+
+
+        function readFile(){
+            var file = this.files[0];
+            if(!/image\/\w+/.test(file.type)){
+                alert("文件必须为图片！");
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsBinaryString(file);
+
+            uploadpicture(file)
+        }
+    function uploadpicture(file){
+        var url = "/upload"
+        var request = new XMLHttpRequest();
+        var form = new FormData();
+        form.append("image", file)
+        request.open("POST", url,false);
+        request.setRequestHeader("token", localStorage.getItem('token'));
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                var json = JSON.parse(request.responseText);
+                console.log(json);
+                alert("update picture sucess! login refresh profile")
+            }else{
+                alert("update failed")
+            }
+        };
+        request.send(form)
+    }
+</script>

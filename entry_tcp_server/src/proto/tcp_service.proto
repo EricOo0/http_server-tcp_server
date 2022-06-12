@@ -1,0 +1,70 @@
+syntax             = "proto3";
+option  go_package = "/proto";
+package admin_service;
+
+service adminService
+{
+    rpc UserInfo(UserInfoReq) returns (UserInfoRsp);
+    rpc EditUserInfo(UserEditReq) returns (UserEditRsp);
+    rpc UploadProfile(UploadProfileReq) returns (UploadProfileRsp);
+    rpc UserLogin(UserLoginReq) returns (UserLoginRsp);
+    rpc RegisterUser(RegisterUserReq) returns (RegisterUserRsp);
+}
+message UserInfoReq
+{
+    string UserId = 1;
+}
+message UserInfoRsp
+{
+    string UserId         = 1;
+    string NickName       = 2;
+    string ProfilePicture = 3;
+}
+message UserLoginReq
+{
+    string UserId   = 1;
+    string Password = 2;
+}
+message UserLoginRsp
+{
+    bool   status = 1;
+    string msg    = 2;
+}
+
+message UserEditReq
+{
+    string UserId      = 1;
+    string NewPassword = 2;
+    string OldPassword = 3;
+    string NickName    = 4;
+}
+
+message UserEditRsp
+{
+    bool   status = 1;
+    string msg    = 2;
+}
+message UploadProfileReq
+{
+    string UserId = 1;
+    string Url    = 2;
+}
+
+message UploadProfileRsp
+{
+    bool   status = 1;
+    string msg    = 2;
+}
+
+message RegisterUserReq
+{
+    string UserId   = 1;
+    string Password = 2;
+    string NickName = 3;
+}
+
+message RegisterUserRsp
+{
+    bool   status = 1;
+    string msg    = 2;
+}
