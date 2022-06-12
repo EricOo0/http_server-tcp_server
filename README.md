@@ -202,3 +202,10 @@ CREATE TABLE `user_info_tab_00000009` LIKE `user_info_tab_00000000`;
 * 信息修改
 
 <img src="image/image-20220612234054942.png" alt="image-20220612234054942" style="zoom:50%;" />
+
+## TODO
+
+* rpc server的model层为手动构造，可以利用xorm自动生成库表对应的结构体，防止出现bug
+* 可以部署主从同步数据库，读写分离，提高系统鲁棒性
+* 用户登出等逻辑还没加入
+* 可以考虑使用wrt等压测工具对项目进行压测
